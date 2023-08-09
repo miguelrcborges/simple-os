@@ -1,2 +1,3 @@
-/build
-/image
+/iso_root/
+!/iso_root/limine.cfg
+/iso
