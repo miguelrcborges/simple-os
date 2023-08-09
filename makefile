@@ -38,7 +38,6 @@ $(IMAGE): kernel iso_root/limine-bios-cd.bin iso_root/limine-bios.sys iso_root/l
 		--efi-boot limine-uefi-cd.bin \
 		-efi-boot-part --efi-boot-image --protective-msdos-label \
 		iso_root -o $@ 
-	rm iso_root/s-os.elf
 
 iso_root/limine-bios-cd.bin: $(LIMINE_BIOS_CD)
 	cp $^ $@
