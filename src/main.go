@@ -4,6 +4,8 @@ import (
 	"unsafe"
 )
 
+func main() {}
+
 func halt() {
 	for {
 	}
@@ -15,8 +17,14 @@ func halt() {
 //go:linkname _start _start
 //go:nosplit
 func _start() {
-	var _ unsafe.Pointer
+	framebuffer := framebufferRequest.Response.Framebuffers()[0]
+
+	for y := uint64(0); y < framebuffer.Height; y++ {
+		for x := uint64(0); x < framebuffer.Width; x++ {
+			position := uintptr(x + y*framebuffer.Pitch)
+			*(*int32)(unsafe.Add(framebuffer.Address, position*unsafe.Sizeof(uint32(0)))) = 0xffffff
+		}
+	}
+
 	halt()
 }
-
-func main() {}
